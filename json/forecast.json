@@ -1,0 +1,61 @@
+{
+    "forecast_for_one_day": [
+        {
+            "time": "2026-03-09 06:00:00",
+            "weather_type": "Clouds",
+            "temp": 7.14
+        },
+        {
+            "time": "2026-03-09 09:00:00",
+            "weather_type": "Clouds",
+            "temp": 8.74
+        },
+        {
+            "time": "2026-03-09 12:00:00",
+            "weather_type": "Clouds",
+            "temp": 12.23
+        },
+        {
+            "time": "2026-03-09 15:00:00",
+            "weather_type": "Clouds",
+            "temp": 15.18
+        },
+        {
+            "time": "2026-03-09 18:00:00",
+            "weather_type": "Rain",
+            "temp": 11.81
+        }
+    ],
+    "forecast_for_five_days": [
+        {
+            "time": "2026-03-09",
+            "weather_type": "Clouds",
+            "temp": 7.14
+        },
+        {
+            "time": "2026-03-10",
+            "weather_type": "Clouds",
+            "temp": 10.91
+        },
+        {
+            "time": "2026-03-11",
+            "weather_type": "Clouds",
+            "temp": 8.1
+        },
+        {
+            "time": "2026-03-12",
+            "weather_type": "Clouds",
+            "temp": 9.92
+        },
+        {
+            "time": "2026-03-13",
+            "weather_type": "Clear",
+            "temp": 9.88
+        },
+        {
+            "time": "2026-03-14",
+            "weather_type": "Clouds",
+            "temp": 10.48
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "primary": {
+        "city": "Алматы",
+        "weather": "Mist",
+        "temp": -0.05
+    },
+    "secondary": {
+        "feels_like": -4.34,
+        "pressure": 1025,
+        "humidity": 93,
+        "wind_speed": 4,
+        "wind_direction": 20,
+        "cloudiness": 100
+    }
+}
