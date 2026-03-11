@@ -31,6 +31,7 @@ jobs:
     - name: Run the server
       run: |
         python app.py
+        done
     - name: Test with unittest
       run: |
         python -m unittest discover
