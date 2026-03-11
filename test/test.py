@@ -1,4 +1,5 @@
-import unittest, requests, json, time
+import unittest, requests, json, os
+from dotenv import load_dotenv
 
 class test(unittest.TestCase):
 
@@ -29,11 +30,16 @@ class test(unittest.TestCase):
             requests.get(server)
 
         status = requests.get(server).status_code
+
+        print("RateLimitServerTest")
         self.assertEqual(status, 429)
 
 
     def testAPIConnection(self):
-        weatherAPI = requests.get("https://api.openweathermap.org/data/2.5/weather?q=Almaty&appid=68adc50359a9b655c39171f4ce0c136c&units=metric&lang=ru")
+        load_dotenv()
+        api_key = os.getenv("API_KEY")
+        url = f"https://api.openweathermap.org/data/2.5/weather?q=Almaty&appid={api_key}&units=metric&lang=ru"
+        weatherAPI = requests.get(url)
         status = weatherAPI.status_code
 
         print("Weather API Connection test")
