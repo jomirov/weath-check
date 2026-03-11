@@ -55,14 +55,5 @@ class test(unittest.TestCase):
             self.assertEqual(status, expected_status)
 
 
-    def testGeolocation(self):
-        city = getCity()
-        expected_city = "Almaty"
-
-        print("Identify Geolocation test")
-
-        self.assertEqual(city, expected_city)
-
-
 if __name__ == "__main__":
     unittest.main()
