@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 class test(unittest.TestCase):
 
     def testServerConnection(self):
-        server = "http://127.0.0.1:5000"
+        server = "https://127.0.0.1:5000"
         res = requests.get(server)
         status = res.status_code
         expected_status = 200
@@ -15,7 +15,7 @@ class test(unittest.TestCase):
 
     
     def testIncorrectServerRoute(self):
-        server = "http://127.0.0.1:5000"
+        server = "https://127.0.0.1:5000"
         incorrectRoute = "/abcdef"
         status = requests.get(server+incorrectRoute).status_code
         expected_status = 404
@@ -26,7 +26,7 @@ class test(unittest.TestCase):
 
 
     def testRateLimitOfServer(self):
-        server = "http://127.0.0.1:5000/ratetest"
+        server = "https://127.0.0.1:5000/ratetest"
         
         for i in range(10):
             requests.get(server)
