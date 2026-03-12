@@ -1,6 +1,5 @@
-import unittest, requests, json, os
+import unittest, requests, os
 from dotenv import load_dotenv
-from modules.ipChecker import getCity
 
 class test(unittest.TestCase):
 

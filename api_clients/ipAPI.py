@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key_ip = os.getenv("API_KEY_IP")
-handler = ipinfo.getHandler(api_key_ip)
+ip_api_key = os.getenv("API_KEY_IP")
+handler = ipinfo.getHandler(ip_api_key)
 details = handler.getDetails()
 
 def getCity():

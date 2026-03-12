@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from modules.ipChecker import getCity
+from api_clients.ipAPI import getCity
 
 load_dotenv()
 
