@@ -14,10 +14,10 @@ class CurrentWeather(Weather):
             "primary": {
                 "city": data["name"],
                 "weather": data["weather"][0]["main"],
-                "temp": data["main"]["temp"]
+                "temp": round(data["main"]["temp"])
             },
             "secondary": {
-                "feels_like": data["main"]["feels_like"],
+                "feels_like": round(data["main"]["feels_like"]),
                 "pressure": data["main"]["pressure"],
                 "humidity": data["main"]["humidity"],
                 "wind_speed": data["wind"]["speed"],
@@ -50,7 +50,7 @@ class ForecastWeather(Weather):
                     {
                         "time": record["dt_txt"],
                         "weather_type": record["weather"][0]["main"],
-                        "temp": record["main"]["temp"]
+                        "temp": round(record["main"]["temp"])
                     }
                 )
 
@@ -62,7 +62,7 @@ class ForecastWeather(Weather):
                         {
                             "time": str(converted_date).split()[0],
                             "weather_type": record["weather"][0]["main"],
-                            "temp": record["main"]["temp"]
+                            "temp": round(record["main"]["temp"])
                         }
                     )
         
