@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block section_content %}
+
+<div class="contacts-block">
+    <div class="contacts-block--div">
+        <div class="contacts-block--div--contacts" style="height:max-content">
+            <h1>Контакты</h1>
+            <p style="margin-top: 30px">Email: example123@gmail.com</p>
+            <p>Facebook: www.facebook/id2312424.com</p>
+            <p>Telegram/Whatsapp: +7 707 777 77 77</p>
+        </div>
+        <img style="width: 55%" src="{{ url_for('static', filename='images/weath_check.svg') }}">
+    </div>
+</div>
+
+{% endblock %}

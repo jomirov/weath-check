@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="icon" type="image" sizes="32x32" href="{{ url_for('static', filename='images/weath-check.svg') }}">
+    <link rel="icon" type="image" sizes="32x32" href="{{ url_for('static', filename='images/weath_check.svg') }}">
 </head>
 <body>
     <header>
@@ -25,13 +25,11 @@
         </label>
         <nav class="header--nav">
             <ul class="header--nav-ul">
-                <li class="header--nav-li"><a href="#">Погода</a></li>
-                <li class="header--nav-li"><a href="#">Новости</a></li>
-                <li class="header--nav-li"><a href="#">Карта</a></li>
-                <li class="header--nav-li"><a href="#">Контакты</a></li>
+                <li class="header--nav-li"><a href="/">Погода</a></li>
+                <li class="header--nav-li"><a href="/map">Карта</a></li>
+                <li class="header--nav-li"><a href="/contacts">Контакты</a></li>
             </ul>
         </nav>
-
     </header>
     <div class="post-header">
         <div class="post-header--block-div">
@@ -41,5 +39,7 @@
     <section class="section--content">
         {% block section_content %}{% endblock %}
     </section>
+    <footer>
+    </footer>
 </body>
 </html>

@@ -1,78 +1,111 @@
 {% extends 'base.html' %}
 
 {% block post_header %}
-    <search class="search-block">
+    <form class="search-block" id="search-block" onsubmit="searchCity(); return false;">
         <input id="search-block--input--city-search" type="text" placeholder="Введите город">
-        <button class="search-block--btn">
+        <button class="search-block--btn" id="search-block--btn" type="submit">
             <svg class="search-block--search-svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.2218 3.22182C7.51757 -1.07394 14.4827 -1.07394 18.7784 3.22182C23.0739 7.51761 23.0741 14.4828 18.7784 18.7785C14.4828 23.0741 7.51759 23.0739 3.2218 18.7785C-1.07397 14.4827 -1.07397 7.51759 3.2218 3.22182ZM16.6564 5.34292C13.5322 2.21894 8.46702 2.2188 5.3429 5.34292C2.21879 8.46704 2.21892 13.5322 5.3429 16.6564C8.46708 19.7806 13.5322 19.7806 16.6564 16.6564C19.7806 13.5322 19.7806 8.46711 16.6564 5.34292Z" fill="#545454"/>
                 <rect x="24.4348" y="27.2633" width="13" height="4" rx="2" transform="rotate(-135 24.4348 27.2633)" fill="#545454"/>
             </svg>
         </button>
-    </search>
+    </form>
+    <label class="forecast-mode-changer-label">
+        <input class="forecast-mode-changer-label--checkbox" id="forecast-mode-changer-label--checkbox" type="checkbox">
+        <span class="forecast-mode-changer-label--span">Дневной</span>
+    </label>
+    <script>
+        function searchCity () {
+
+            const params = new URLSearchParams(window.location.search);
+            const search_input = document.getElementById("search-block--input--city-search");
+            params.set("city", search_input.value);
+            window.location.search = params.toString();
+        }
+        
+        document.getElementById("forecast-mode-changer-label--checkbox").addEventListener("click", () => {
+            if (document.getElementById("forecast-mode-changer-label--checkbox").checked == 1) {
+                document.getElementById("forecast-block--weather-icon-block").innerHTML = 
+                '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<img src="{{ url_for("static", filename="images/"+data["weather_icon"]) }}" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">{% endfor %}';
+                document.getElementById("forecast-block--temp-block").innerHTML = 
+                '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<p class="forecast-block--temp-block--temp">{{ data["temp"] }}°C</p>{% endfor %}';
+                document.getElementById("forecast-block--datetime-block").innerHTML = 
+                '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<p class="forecast-block--datetime-block--datetime">{{ data["time"] }}</p>{% endfor %}';
+            } else {
+                window.location.reload()
+            }
+        })  
+    </script>
 {% endblock %}
 
 {% block section_content %}
     <div class="block-cards">
-        <div class="block-cards--card primary-block">
+        {% set background_img = url_for("static", filename="images/"+current_weather_data["primary"]["weather_background"]) %}
+        <div class="block-cards--card primary-block" style='background-image: url("{{ background_img }}")'>
             <div class="primary-block--group">
-                <img class="primary-block--group--weather-icon" alt="w-icon">
+                <img class="primary-block--group--weather-icon" src="{{ url_for('static', filename='images/'+current_weather_data['primary']['weather_icon']) }}" alt="w-icon">
                 <div class="primary-block--group--temp-block">
-                    <p class="primary-block--group--temp-block--temp">27°C</p>
-                    <p class="primary-block--group--temp-block--night-temp">/ ночью 10°C</p>
+                    <p class="primary-block--group--temp-block--temp">{{ current_weather_data["primary"]["temp"] }}°C</p>
+                    <p class="primary-block--group--temp-block--night-temp">/ ночью {{ current_weather_data["primary"]["night_temp"] }}°C</p> <!-- PROBLEM NO DATA -->
                 </div>
             </div>
-            <p class="primary-block--date">Пн. 14 сентября</p>
-            <p class="primary-block--city">г. Алматы</p>
+            <p class="primary-block--date">{{ current_weather_data["primary"]["date"] }}</p>
+            <p class="primary-block--city">г. {{ current_weather_data["primary"]["city"] }}</p>
         </div>
         <div class="block-cards--card forecast-block">
-            <div class="forecast-block--weather-icon-block">
-                <img src="#" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
-                <img src="#" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
-                <img src="#" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
-                <img src="#" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
-                <img src="#" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
+            <div class="forecast-block--weather-icon-block" id="forecast-block--weather-icon-block">
+                {% for data in forecast_weather_data["forecast_for_one_day"][:5] %}
+                <img src="{{ url_for('static', filename='images/'+data['weather_icon']) }}" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">
+                {% endfor %}
+
             </div>
-            <div class="forecast-block--temp-block">
-                <p class="forecast-block--temp-block--temp">5°C</p>
-                <p class="forecast-block--temp-block--temp">5°C</p>
-                <p class="forecast-block--temp-block--temp">5°C</p>
-                <p class="forecast-block--temp-block--temp">5°C</p>
-                <p class="forecast-block--temp-block--temp">5°C</p>
+            <div class="forecast-block--temp-block" id="forecast-block--temp-block">
+                {% for data in forecast_weather_data["forecast_for_one_day"][:5] %}
+                <p class="forecast-block--temp-block--temp">{{ data["temp"] }}°C</p>
+                {% endfor %}
             </div>
             <div class="forecast-block--pointed-line">
-                <svg width="410" height="20">
+                <svg class="pointed-line" width="410" height="20">
                     <line x1="10" y1="10" x2="400" y2="10" stroke="grey" stroke-width="2"/>
-                    <circle cx="10" cy="10" r="7" style="fill: var(--blue)"/>
-                    <circle cx="100" cy="10" r="5" fill="grey"/>
-                    <circle cx="200" cy="10" r="5" fill="grey"/>
-                    <circle cx="300" cy="10" r="5" fill="grey"/>
-                    <circle cx="398" cy="10" r="5" fill="grey"/>
+                    <circle cx="3%" cy="10" r="7" style="fill: var(--blue)"/>
+                    <circle cx="25%" cy="10" r="5" fill="grey"/>
+                    <circle cx="50%" cy="10" r="5" fill="grey"/>
+                    <circle cx="75%" cy="10" r="5" fill="grey"/>
+                    <circle cx="98%" cy="10" r="5" fill="grey"/>
                 </svg>
             </div>
-            <div class="forecast-block--datetime-block">
-                <p class="forecast-block--datetime-block--datetime">12:00</p>
-                <p class="forecast-block--datetime-block--datetime">13:00</p>
-                <p class="forecast-block--datetime-block--datetime">14:00</p>
-                <p class="forecast-block--datetime-block--datetime">15:00</p>
-                <p class="forecast-block--datetime-block--datetime">16:00</p>
+            <div class="forecast-block--datetime-block" id="forecast-block--datetime-block">
+                {% for data in forecast_weather_data["forecast_for_one_day"] %}
+                <p class="forecast-block--datetime-block--datetime">{{ data["time"] }}</p>
+                {% endfor %}
             </div>
         </div>
         <div class="block-cards--card secondary-block">
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Температура</p><div class="isle"></div><p class="secondary-block--data-block--data">°C</p></div>
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Облачность</p><div class="isle"></div><p class="secondary-block--data-block--data">%</p></div>
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Влажность</p><div class="isle"></div><p class="secondary-block--data-block--data">%</p></div>
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Давление</p><div class="isle"></div><p class="secondary-block--data-block--data">кг/м3</p></div>
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Скорость ветра</p><div class="isle"></div><p class="secondary-block--data-block--data">м/с</p></div>
-            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Направление ветра</p><div class="isle"></div><p class="secondary-block--data-block--data">С</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Температура</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["feels_like"] }}°C</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Облачность</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["cloudiness"] }}%</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Влажность</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["humidity"] }}%</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Давление</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["pressure"] }} мм. рт. ст.</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Скорость ветра</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["wind_speed"] }} м/с</p></div>
+            <div class="secondary-block--data-block"><p class="secondary-block--data-block--title">Направление ветра</p><div class="isle"></div><p class="secondary-block--data-block--data">{{ current_weather_data["secondary"]["wind_direction"] }}</p></div>
         </div>
         <div class="block-cards--card additional-block">
             <div class="additional-block--data-block">
-                <img alt="sunrise">
-                <p>05:32</p>
-                <img alt="sunset">
-                <p>18:22</p>
+                <div class="additional-block--data-block--div">
+                    <img src="{{ url_for('static', filename='images/sunrise_icon.png') }}" class="additional-block--data-block--div--sun-icon" alt="sunrise">
+                    <p>{{ current_weather_data["secondary"]["sunrise"] }}</p>
+                </div>
+                <div class="additional-block--data-block--div">
+                    <img src="{{ url_for('static', filename='images/sunset_icon.png') }}" class="additional-block--data-block--div--sun-icon" alt="sunset" >
+                    <p>{{ current_weather_data["secondary"]["sunset"] }}</p>
+                </div>
             </div>
         </div>
     </div> 
+    <style>
+        @media(max-width:1280px){
+            .section--content {
+                height: 1100px
+            }
+        }
+    </style>
 {% endblock %}
