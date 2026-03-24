@@ -1,0 +1,230 @@
+/* POST-HEADER */
+
+.post-header {
+    background: var(--blue);
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.post-header--block-div {
+    width: 1100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    position: relative;
+}
+
+.search-block {
+    width: 50%;
+    display: flex;
+    position: relative;
+}
+
+#search-block--input--city-search {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px
+}
+
+#search-block--input--city-search:focus {
+    outline: none;
+}
+
+.search-block--btn {
+    position: absolute;
+    right: 2%;
+    height: 100%;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer
+}
+
+.search-block--search-svg {
+    display: flex;
+    height: 25px
+}
+
+.forecast-mode-changer-label {
+    display: flex;
+    position:absolute;
+    height: 100%;
+    right: 3%;
+    align-items: center;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    width: 15%;
+}
+.forecast-mode-changer-label--checkbox {
+    opacity: 0;
+    z-index: 1
+}
+.forecast-mode-changer-label--span {
+    display: flex;
+    position: absolute;
+    background: #357fff;
+    height: 70%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: whitesmoke;
+    transition: 0.1s;
+}
+.forecast-mode-changer-label--span:hover {
+    background: #2768d8
+}
+
+.forecast-mode-changer-label--checkbox:checked ~ .forecast-mode-changer-label--span {
+    background: #2768d8
+}
+
+/* POST-HEADER */
+
+/* HOME */
+
+
+.block-cards {
+    margin: 0 auto;
+    display: grid;
+    max-width: 100%;
+    width: 1100px;
+    height: 600px;
+    padding: 2% 0;
+    gap: 20px;
+    grid-template-columns: 500px 1fr 450px;
+    grid-template-rows: 300px 300px;
+    grid-template-areas: 
+    "card1 card2 card2"
+    "card3 card3 card4";
+}
+
+.block-cards--card {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.block-cards--card:nth-child(1) {
+    grid-area: card1;
+    background-size: cover;
+} 
+.block-cards--card:nth-child(2) {
+    grid-area: card2;
+}
+.block-cards--card:nth-child(3) {
+    grid-area: card3;
+}
+.block-cards--card:nth-child(4) {
+    grid-area: card4;
+}
+
+.primary-block {
+    padding: 5%;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.primary-block--group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.primary-block--group--weather-icon {
+    height: 80px;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5))
+}
+.primary-block--date {
+    margin-top: 20px
+}
+.primary-block--group--temp-block--temp {
+    font-size: 40px;
+    font-weight:bold
+}
+.primary-block--city {
+    display: flex;
+    align-self: flex-end;
+    font-size: 50px;
+    font-weight: 600
+}
+
+.forecast-block {
+    padding-block: 5%;
+    padding-inline: 7%
+}
+.forecast-block--weather-icon-block {
+    display: flex;
+    justify-content: space-between;
+    height: 20%
+}
+.forecast-block--weather-icon-block--weather-icon {
+    width: 15%;
+    height: auto;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5))
+}
+.forecast-block--temp-block, .forecast-block--datetime-block {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 25px;
+    margin-top: 20px;
+    color:#2b2b2b
+}
+.forecast-block--pointed-line {
+    margin-inline: 30px;
+    margin-top: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-block {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--grey)
+}
+.secondary-block--data-block {
+    display: flex;
+    flex-direction: row;
+}
+.isle {
+    display: flex;
+    flex: 1;
+    border-bottom: 2px dashed grey;
+    margin-inline: 10px;
+    height: 75%
+}
+
+.additional-block {
+    padding: 2%;
+    padding-inline: 22%;
+}
+.additional-block--data-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: var(--grey)
+}
+.additional-block--data-block--div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.additional-block--data-block--div--sun-icon {
+    height: 90px
+}
+
+/* HOME */

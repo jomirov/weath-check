@@ -181,11 +181,11 @@ header {
     display: flex;
     position:absolute;
     height: 100%;
-    right: 0;
+    right: 3%;
     align-items: center;
     flex-direction: row-reverse;
     cursor: pointer;
-    width: 10%
+    width: 15%;
 }
 .forecast-mode-changer-label--checkbox {
     opacity: 0;
@@ -413,7 +413,9 @@ header {
 footer {
     width: 100%;
     height: 100px;
-    background-color: var(--blue)
+    background-color: var(--blue);
+    justify-content: center;
+    align-self: center;
 }
 
 /* FOOTER */

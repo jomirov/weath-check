@@ -1,14 +1,17 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_caching import Cache
 from services import weather
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["CACHE_TYPE"] = "SimpleCache"
 
-cache = Cache()
+cache = Cache(app=app)
 
 limiter = Limiter(
     get_remote_address,
@@ -17,23 +20,18 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
-@cache.cached(timeout=300)
 @app.route('/')
+@cache.cached(timeout=300)
 def home():
     city = request.args.get("city")
     current_weather_data = weather.CurrentWeather(city).getCurrent()
     forecast_weather_data = weather.ForecastWeather(city).getForecast()
-    return render_template("index.html", 
-                           current_weather_data=current_weather_data, 
-                           forecast_weather_data=forecast_weather_data)
-
-@app.route('/map')
-def map():
-    return render_template("map.html")
-
-@app.route('/contacts')
-def contacts():
-    return render_template("contacts.html")
+    return jsonify(
+        {
+            "current_weather_data": current_weather_data,
+            "forecast_weather_data": forecast_weather_data
+        }
+    )
 
 @app.route("/ratetest")
 @limiter.limit("10 per minute")

@@ -1,0 +1,95 @@
+header {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1100px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.header--nav {
+    display: flex;
+    width: 40%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5%;
+    height: 100%;
+    z-index: 99;
+}   
+
+.header--nav-ul {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    list-style: none
+}
+
+.header--nav-li {
+    text-decoration: none;
+    color: var(--blue);
+    display: flex;
+    height: 100%; 
+    width: 125px;
+    align-items: center;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.header--nav-li:hover {
+    background-color: rgba(0,0,0,0.05)
+}
+
+.header--nav-li a {
+    text-decoration: none;
+    color: currentColor;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header--burger-label {
+    display: none;
+    position: absolute;
+    right: 0;
+    height: 35px;
+    width: 40px;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    justify-content: center;
+}
+
+#header--burger-checkbox {
+    display: none
+}
+
+.header--burger-span{
+    height: 0;
+    top: 50%;
+}
+
+.header--burger-span::before, .header--burger-span::after {
+    content:'';
+    position: absolute;
+    display: flex;
+    justify-self: center;
+}
+
+.header--burger-span::before {
+    top: 20%;
+}
+
+.header--burger-span::after {
+    bottom: 20%;
+}
+
+.header--burger-span, .header--burger-span::before, .header--burger-span::after{
+    border: 1px solid var(--blue);
+    border-radius: 10px;
+    width: 25px;
+}

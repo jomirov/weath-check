@@ -1,0 +1,72 @@
+{
+    "forecast_for_one_day": [
+        {
+            "time": "09:00",
+            "weather_type": "Rain",
+            "temp": 13,
+            "weather_icon": "rainy_icon.png"
+        },
+        {
+            "time": "12:00",
+            "weather_type": "Rain",
+            "temp": 13,
+            "weather_icon": "rainy_icon.png"
+        },
+        {
+            "time": "15:00",
+            "weather_type": "Clouds",
+            "temp": 12,
+            "weather_icon": "cloudy_icon.png"
+        },
+        {
+            "time": "18:00",
+            "weather_type": "Clouds",
+            "temp": 10,
+            "weather_icon": "cloudy_icon.png"
+        },
+        {
+            "time": "21:00",
+            "weather_type": "Clear",
+            "temp": 9,
+            "weather_icon": "sunny_icon.png"
+        }
+    ],
+    "forecast_for_five_days": [
+        {
+            "time": "03-24",
+            "weather_type": "Rain",
+            "temp": 13,
+            "weather_icon": "rainy_icon.png"
+        },
+        {
+            "time": "03-25",
+            "weather_type": "Clear",
+            "temp": 7,
+            "weather_icon": "sunny_icon.png"
+        },
+        {
+            "time": "03-26",
+            "weather_type": "Clear",
+            "temp": 9,
+            "weather_icon": "sunny_icon.png"
+        },
+        {
+            "time": "03-27",
+            "weather_type": "Clear",
+            "temp": 11,
+            "weather_icon": "sunny_icon.png"
+        },
+        {
+            "time": "03-28",
+            "weather_type": "Clear",
+            "temp": 9,
+            "weather_icon": "sunny_icon.png"
+        },
+        {
+            "time": "03-29",
+            "weather_type": "Clear",
+            "temp": 9,
+            "weather_icon": "sunny_icon.png"
+        }
+    ]
+}

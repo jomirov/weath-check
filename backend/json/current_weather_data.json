@@ -1,0 +1,21 @@
+{
+    "primary": {
+        "city": "Алматы",
+        "weather": "Clouds",
+        "temp": 13,
+        "night_temp": 7,
+        "date": "Вт. 24 марта",
+        "weather_icon": "cloudy_icon.png",
+        "weather_background": "cloudy_background.png"
+    },
+    "secondary": {
+        "feels_like": 11,
+        "pressure": 1023,
+        "humidity": 38,
+        "wind_speed": 5,
+        "wind_direction": "ЮЗ",
+        "cloudiness": 75,
+        "sunrise": "05:49",
+        "sunset": "18:08"
+    }
+}

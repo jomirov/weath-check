@@ -1,6 +1,7 @@
 import api_clients.weatherAPI as weatherAPI
 from datetime import timedelta, datetime
 from services import weather_details_setter, wind_direction_checker
+import json
 
 class Weather:
     def __init__(self, city):
@@ -54,6 +55,9 @@ class CurrentWeather(Weather):
             }
         }
 
+        with open("json/current_weather_data.json", "w",encoding="utf-8") as file:
+            json.dump(current_weather_data, file, ensure_ascii=False, indent=4)
+
         return current_weather_data
 
 
@@ -98,5 +102,9 @@ class ForecastWeather(Weather):
                         }
                     )
         
+
+        with open("json/forecast_weather_data.json", "w", encoding="utf-8") as file:
+            json.dump({"forecast_for_one_day": forecast_for_one_day, "forecast_for_five_days": forecast_for_five_days}, file, indent=4, ensure_ascii=False)
+
         return {"forecast_for_one_day": forecast_for_one_day, 
                 "forecast_for_five_days": forecast_for_five_days}
