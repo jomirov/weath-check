@@ -1,8 +1,9 @@
 import './Home.css'
 
-function PostHeaderForSearch() {
+function PostHeaderForSearch( { setForecastMode } ) {
 
-    function searchCity () {
+    function searchCity (e) {
+        e.preventDefault();
         const params = new URLSearchParams(window.location.search);
         const search_input = document.getElementById("search-block--input--city-search");
         params.set("city", search_input.value);
@@ -10,18 +11,12 @@ function PostHeaderForSearch() {
     }
 
     function changeForecastMode(event) {
-        if (event.target.checked == True) {
-            document.getElementById("forecast-block--weather-icon-block").innerHTML = 
-            '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<img src="{{ url_for("static", filename="images/"+data["weather_icon"]) }}" alt="w-icon" class="forecast-block--weather-icon-block--weather-icon">{% endfor %}';
-            document.getElementById("forecast-block--temp-block").innerHTML = 
-            '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<p class="forecast-block--temp-block--temp">{{ data["temp"] }}°C</p>{% endfor %}';
-            document.getElementById("forecast-block--datetime-block").innerHTML = 
-            '{% for data in forecast_weather_data["forecast_for_five_days"][:5] %}<p class="forecast-block--datetime-block--datetime">{{ data["time"] }}</p>{% endfor %}';
+        if (event.target.checked == true) {
+            setForecastMode(false);
         } else {
-            window.location.reload
+            setForecastMode(true);
         }
-    }  
-
+    }
 
     return (
         <>
@@ -35,11 +30,10 @@ function PostHeaderForSearch() {
                 </button>
             </form>
             <label className="forecast-mode-changer-label">
-                <input className="forecast-mode-changer-label--checkbox" id="forecast-mode-changer-label--checkbox" type="checkbox" onChange={ (event) => changeForecastMode(event) }/>
+                <input className="forecast-mode-changer-label--checkbox" id="forecast-mode-changer-label--checkbox" onChange={(event) => changeForecastMode(event)} type="checkbox"/>
                 <span className="forecast-mode-changer-label--span">Дневной</span>
             </label>
         </>
     )
 }
-
 export default PostHeaderForSearch;

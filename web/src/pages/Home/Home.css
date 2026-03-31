@@ -227,4 +227,29 @@
     height: 90px
 }
 
+@media(max-width:1280px){
+    .section--content {
+        height: 1100px
+    }
+    .block-cards {
+        grid-template-areas:
+        "card1"
+        "card2"
+        "card3"
+        "card4";
+        grid-template-rows: 250px 250px 250px 250px;
+        grid-template-columns: 60%;
+        justify-content: center;
+    }
+    .additional-block--data-block {
+        flex-direction: row;
+        padding-block: 10%;
+    }
+
+}
+@media(max-width: 660px) {
+    .block-cards {
+        grid-template-columns: 90%;
+    }
+}
 /* HOME */

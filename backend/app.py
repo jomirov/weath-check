@@ -11,7 +11,6 @@ CORS(app)
 
 app.config["CACHE_TYPE"] = "SimpleCache"
 
-cache = Cache(app=app)
 
 limiter = Limiter(
     get_remote_address,
@@ -20,8 +19,10 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+cache = Cache(app=app)
+
 @app.route('/')
-@cache.cached(timeout=300)
+@cache.cached(timeout=300, query_string=True)
 def home():
     city = request.args.get("city")
     current_weather_data = weather.CurrentWeather(city).getCurrent()

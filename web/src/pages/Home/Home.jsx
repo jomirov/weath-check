@@ -2,15 +2,18 @@ import { useEffect, useState } from 'react'
 import './Home.css'
 
 
-function Home() {
+function Home( { forecastMode } ) {
     const [ loading, setLoading ] = useState(true);
     const [ currentWeatherData, setCurrentWeatherData ] = useState(null);
     const [ forecastWeatherData, setForecastWeatherData ] = useState(null);
+    
 
     useEffect(() => {
         async function fetchData() {
-            try {    
-                const res = await fetch("http://127.0.0.1:5000");
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const searchingCity = params.get("city")
+                const res = await fetch(`http://127.0.0.1:5000/?city=${searchingCity}`);
                 const data = await res.json();
                 setCurrentWeatherData(data.current_weather_data);
                 setForecastWeatherData(data.forecast_weather_data);
@@ -26,7 +29,6 @@ function Home() {
     if (loading) {
         return <div style={{ height: '500px' }}>Loading</div>
     }
-
 
     return (
         <>
@@ -44,14 +46,26 @@ function Home() {
                 </div>
                 <div className="block-cards--card forecast-block">
                     <div className="forecast-block--weather-icon-block" id="forecast-block--weather-icon-block">
-                        { forecastWeatherData.forecast_for_one_day.map((record) => (
-                            <img src={`${record.weather_icon}`} alt="w-icon" className="forecast-block--weather-icon-block--weather-icon"/>
-                        )) }
+                        { forecastMode ?
+                            forecastWeatherData.forecast_for_one_day.map((record) => (
+                                <img src={`${record.weather_icon}`} alt="w-icon" className="forecast-block--weather-icon-block--weather-icon"/>
+                            ))
+                            :
+                            forecastWeatherData.forecast_for_five_days.map((record) => (
+                                <img src={`${record.weather_icon}`} alt="w-icon" className="forecast-block--weather-icon-block--weather-icon"/>
+                            )) 
+                        }
                     </div>
                     <div className="forecast-block--temp-block" id="forecast-block--temp-block">
-                        { forecastWeatherData.forecast_for_one_day.map((record) => (
-                            <p className="forecast-block--temp-block--temp">{ record.temp }°C</p>
-                        )) }
+                        { forecastMode ? 
+                            forecastWeatherData.forecast_for_one_day.map((record) => (
+                                <p className="forecast-block--temp-block--temp">{ record.temp }°C</p>
+                            ))
+                            :
+                            forecastWeatherData.forecast_for_five_days.map((record) => (
+                                <p className="forecast-block--temp-block--temp">{ record.temp }°C</p>
+                            ))
+                        }
                     </div>
                     <div className="forecast-block--pointed-line">
                         <svg className="pointed-line" width="410" height="20">
@@ -63,10 +77,16 @@ function Home() {
                             <circle cx="98%" cy="10" r="5" fill="grey"/>
                         </svg>
                     </div>
-                    <div className="forecast-block--datetime-block" id="forecast-block--datetime-block">
-                        { forecastWeatherData.forecast_for_one_day.map((record) => (
-                            <p className="forecast-block--datetime-block--datetime">{ record.time }</p>
-                        )) }
+                    <div className="srforecast-block--datetime-block" id="forecast-block--datetime-block">
+                        { forecastMode ? 
+                            forecastWeatherData.forecast_for_one_day.map((record) => (
+                                <p className="forecast-block--datetime-block--datetime">{ record.time }</p>
+                            ))
+                            :
+                            forecastWeatherData.forecast_for_five_days.map((record) => (
+                                <p className="forecast-block--datetime-block--datetime">{ record.time }</p>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="block-cards--card secondary-block">
@@ -90,16 +110,9 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <style>
-                {`    
-                    @media(max-width:1280px){
-                        .section--content {
-                            height: 1100px
-                        }
-                    }
-                `}
-            </style>
         </> 
     )
 }
+
+
 export default Home;
